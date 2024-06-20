@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c54jjkjwh2hsc"]
+
+[ext_resource type="Texture2D" uid="uid://c6snx2snaqagc" path="res://assets/gauges/alt_ring.png" id="1_5r2v1"]
+[ext_resource type="Script" path="res://instruments/compass.gd" id="1_mte02"]
+[ext_resource type="Texture2D" uid="uid://dbws50hsikwfp" path="res://assets/gauges/compass_face.png" id="2_im2hb"]
+[ext_resource type="Texture2D" uid="uid://c0wcaxdwcdgig" path="res://assets/gauges/compass_plane.png" id="3_g3ejy"]
+
+[node name="Compass" type="CenterContainer"]
+custom_minimum_size = Vector2(500, 500)
+offset_top = -1.0
+offset_right = 500.0
+offset_bottom = 499.0
+script = ExtResource("1_mte02")
+
+[node name="Ring" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_5r2v1")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Face" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+pivot_offset = Vector2(250, 250)
+texture = ExtResource("2_im2hb")
+
+[node name="Indicator" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_g3ejy")

@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://bblpp4uwyhxyx"]
+
+[ext_resource type="PackedScene" uid="uid://cnbeqfdyytsyw" path="res://planes/cartoon_plane.tscn" id="1_8f0wg"]
+[ext_resource type="Texture2D" uid="uid://b14mltgipglul" path="res://assets/styled_sky.hdr" id="1_ofd08"]
+[ext_resource type="Texture2D" uid="uid://2j1x34wpf6jr" path="res://assets/prototype_textures/Dark/texture_01.png" id="2_snrxp"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="2_vsrm7"]
+[ext_resource type="PackedScene" uid="uid://ywngbksr0edx" path="res://instruments/instrument_panel.tscn" id="4_qos2w"]
+[ext_resource type="PackedScene" uid="uid://k4aibcnqbbeg" path="res://buildings/building_1.tscn" id="5_aihts"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_76liy"]
+panorama = ExtResource("1_ofd08")
+
+[sub_resource type="Sky" id="Sky_l5epd"]
+sky_material = SubResource("PanoramaSkyMaterial_76liy")
+
+[sub_resource type="Environment" id="Environment_k8bss"]
+background_mode = 2
+sky = SubResource("Sky_l5epd")
+ambient_light_color = Color(0.501961, 0.501961, 0.501961, 1)
+ambient_light_sky_contribution = 0.3
+ambient_light_energy = 3.0
+tonemap_mode = 2
+tonemap_white = 6.0
+ssr_enabled = true
+ssao_enabled = true
+ssao_intensity = 1.67
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_blend_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cnu0p"]
+albedo_texture = ExtResource("2_snrxp")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5rhyj"]
+material = SubResource("StandardMaterial3D_cnu0p")
+size = Vector2(150, 150)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ua7vj"]
+data = PackedVector3Array(75, 0, 75, -75, 0, 75, 75, 0, -75, -75, 0, 75, -75, 0, -75, 75, 0, -75)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k8bss")
+
+[node name="cartoon_plane" parent="." instance=ExtResource("1_8f0wg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.783428, 46.5903)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07984, 57.0147)
+script = ExtResource("2_vsrm7")
+target_path = NodePath("../cartoon_plane")
+offset = Vector3(2.08165e-12, 4, 8)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_5rhyj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ua7vj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InstrumentPanel" parent="CanvasLayer" node_paths=PackedStringArray("plane") instance=ExtResource("4_qos2w")]
+plane = NodePath("../../cartoon_plane")
+
+[node name="Building1" parent="." instance=ExtResource("5_aihts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.8472, 0, 2.91623)
+
+[node name="Building2" parent="." instance=ExtResource("5_aihts")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -31.2859, 0, 20.9162)

@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://dc8lsyclf7ca5"]
+
+[ext_resource type="Script" path="res://instruments/attitude_indicator.gd" id="1_p8c7f"]
+[ext_resource type="Texture2D" uid="uid://cixh7itvyekq2" path="res://assets/gauges/ai_inner.png" id="1_q6pr2"]
+[ext_resource type="Texture2D" uid="uid://ci3c5wbj0st6d" path="res://assets/gauges/ai_ring2.png" id="3_ah02l"]
+[ext_resource type="Texture2D" uid="uid://djy4gbu5jhbky" path="res://assets/gauges/ai_marker.png" id="4_nuqrn"]
+[ext_resource type="Texture2D" uid="uid://d38gtf8afyjt0" path="res://assets/gauges/ai_top_marker.png" id="4_x3gcw"]
+[ext_resource type="Texture2D" uid="uid://dmy3tclwkolm8" path="res://assets/gauges/mask.png" id="5_pgbl8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk3yq"]
+atlas = ExtResource("1_q6pr2")
+region = Rect2(2.08165e-12, 2.08165e-12, 500, 1000)
+
+[node name="AttitudeIndicator" type="CenterContainer"]
+custom_minimum_size = Vector2(500, 500)
+offset_right = 500.0
+offset_bottom = 500.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_p8c7f")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="Mask" type="TextureRect" parent="Control"]
+clip_children = 1
+layout_mode = 2
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(250, 250)
+texture = ExtResource("5_pgbl8")
+
+[node name="Inner" type="TextureRect" parent="Control/Mask"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -500.0
+offset_right = 250.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_wk3yq")
+stretch_mode = 3
+
+[node name="TopMarker" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_left = -250.0
+offset_top = -188.0
+offset_right = 250.0
+offset_bottom = 312.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(250, 188)
+texture = ExtResource("4_x3gcw")
+
+[node name="Ring" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_ah02l")
+stretch_mode = 3
+
+[node name="CenterMarker" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("4_nuqrn")

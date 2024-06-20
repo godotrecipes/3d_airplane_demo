@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm8opvaotogig"]
+
+[ext_resource type="Shader" path="res://gds_energy.gdshader" id="1_xlnwx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwg2s"]
+render_priority = 0
+shader = ExtResource("1_xlnwx")
+shader_parameter/albedo = Color(1, 1, 0.164706, 1)
+shader_parameter/emission_color = Color(1, 0.976471, 0.188235, 1)
+shader_parameter/emission_amount = 5.0
+shader_parameter/rim_steepness = 0.0
+shader_parameter/uv_scale = null
+shader_parameter/uv_offset = null
+
+[sub_resource type="TorusMesh" id="TorusMesh_ukkiy"]
+material = SubResource("ShaderMaterial_lwg2s")
+inner_radius = 3.0
+outer_radius = 3.2
+
+[node name="Bubble" type="MeshInstance3D"]
+mesh = SubResource("TorusMesh_ukkiy")

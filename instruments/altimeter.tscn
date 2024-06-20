@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://doqkkyjmpnhxn"]
+
+[ext_resource type="Texture2D" uid="uid://c6snx2snaqagc" path="res://assets/gauges/alt_ring.png" id="1_36yae"]
+[ext_resource type="Script" path="res://instruments/altimeter.gd" id="1_leiuq"]
+[ext_resource type="Texture2D" uid="uid://qk4qdq31v00y" path="res://assets/gauges/alt_face.png" id="2_d6wuc"]
+[ext_resource type="Texture2D" uid="uid://cq3ddhfigp3em" path="res://assets/gauges/alt_hand_lg.png" id="3_p7qfr"]
+[ext_resource type="Texture2D" uid="uid://bomm6cgvjwla5" path="res://assets/gauges/alt_hand_sm.png" id="3_v6q7p"]
+
+[node name="Altimeter" type="CenterContainer"]
+custom_minimum_size = Vector2(500, 500)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_leiuq")
+
+[node name="Ring" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_36yae")
+
+[node name="Face" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_d6wuc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="HandSmall" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+pivot_offset = Vector2(250, 250)
+texture = ExtResource("3_v6q7p")
+
+[node name="HandLarge" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+pivot_offset = Vector2(250, 250)
+texture = ExtResource("3_p7qfr")
